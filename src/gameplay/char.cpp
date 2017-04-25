@@ -2,12 +2,6 @@
 #include <iostream>
 #include <string>
 #include "player1.hpp"
-#include "th.hpp"
-
-// void	bombThread(s_bomb *data)
-// {
-//   data->p1.putBomb(data->window);
-// }
 
 int	main()
 {
