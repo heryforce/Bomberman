@@ -1,6 +1,6 @@
 #include "player1.hpp"
 #include <iostream>
-#include "bomb.hpp"
+#include "bomb1.hpp"
 
 void	Player1::setAmmo(bool ammo)
 {
@@ -34,25 +34,25 @@ sf::Vector2f	Player1::move(sf::Event event)
 {
   switch(event.key.code)
     {
-    case sf::Keyboard::Up:
+    case sf::Keyboard::Z:
       if (_spriteP1.getTexture() != &_textUp)
 	_spriteP1.setTexture(_textUp);
       if (_spriteP1.getPosition().y > 8)
 	_spriteP1.move(0, -9);
       break;
-    case sf::Keyboard::Down:
+    case sf::Keyboard::S:
       if (_spriteP1.getTexture() != &_textDown)
 	_spriteP1.setTexture(_textDown);
       if (_spriteP1.getPosition().y < 468)
 	_spriteP1.move(0, 9);
       break;
-    case sf::Keyboard::Left:
+    case sf::Keyboard::Q:
       if (_spriteP1.getTexture() != &_textLeft)
 	_spriteP1.setTexture(_textLeft);
       if (_spriteP1.getPosition().x > 8)
 	_spriteP1.move(-9, 0);
       break;
-    case sf::Keyboard::Right:
+    case sf::Keyboard::D:
       if (_spriteP1.getTexture() != &_textRight)
 	_spriteP1.setTexture(_textRight);
       if (_spriteP1.getPosition().x < 468)
@@ -78,6 +78,7 @@ Player1::Player1() : _pv(2), _ammo(true)
     {
       _spriteP1.setTexture(_textDown);
       _spriteP1.setPosition(0, 0);
+      _ammo = true;
     }  
 }
 
