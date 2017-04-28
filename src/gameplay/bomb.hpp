@@ -1,9 +1,9 @@
-#ifndef BOMB2_HPP_
-#define BOMB2_HPP_
+#ifndef BOMB_HPP_
+#define BOMB_HPP_
 
 #include <SFML/Graphics.hpp>
 
-class	Bomb2
+class	Bomb
 {
   sf::Texture	_textBomb;
   sf::Sprite	_spriteBomb;
@@ -13,10 +13,10 @@ public:
   void		setPos(sf::Vector2f);
   void		explosion(sf::Vector2f);
 
-  Bomb2();
-  Bomb2(const Bomb2 &);
-  ~Bomb2();
-  Bomb2	&operator=(const Bomb2 &);
+  Bomb();
+  Bomb(const Bomb &);
+  ~Bomb();
+  Bomb	&operator=(const Bomb &);
 };
 
 #endif
