@@ -31,6 +31,23 @@ sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
     }
 }
 
+void	bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
+{
+  static int	x = 1;
+  
+  if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
+    window->draw(spriteBomb);
+  else if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() >= 1 && x <= 9)
+    p->explosion(window, spriteBomb.getPosition(), x++);
+  else if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() >= 1 && x > 9)
+    {
+      p->setAmmo(true);
+      x = 1;
+    }
+  else
+    x = 1;
+}
+
 int			main()
 {
   sf::RenderWindow	window(sf::VideoMode(500, 500), "BomberSwann");
@@ -61,17 +78,11 @@ int			main()
 	  std::cout << "PLAYER 2 : x = " << pos2.x << ", y = " << pos2.y << std::endl;
 	}
       window.clear();
-      if (p1.getAmmo() == false && clock1.getElapsedTime().asSeconds() < 1)
-	window.draw(spriteBomb1);
-      if (p2.getAmmo() == false && clock2.getElapsedTime().asSeconds() < 1)
-	window.draw(spriteBomb2);
+      bomb_drawing(&p1, &clock1, spriteBomb1, &window);
+      bomb_drawing(&p2, &clock2, spriteBomb2, &window);
       window.draw(p1.getP());
       window.draw(p2.getP());
       window.display();
-      if (clock1.getElapsedTime().asSeconds() > 1)
-	p1.setAmmo(true);
-      if (clock2.getElapsedTime().asSeconds() > 1)
-	p2.setAmmo(true);
     }
   return 0;
 }

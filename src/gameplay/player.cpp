@@ -2,6 +2,11 @@
 #include <iostream>
 #include "bomb.hpp"
 
+void	Player::explosion(sf::RenderWindow *window, sf::Vector2f bombPos, int x)
+{
+  _bomb.explosion(bombPos, window, x);
+}
+
 int	Player::getNb() const
 {
   return _nb;
@@ -124,13 +129,13 @@ Player::Player(int nb) : _nb(nb), _pv(2), _ammo(true)
     }
   else
     {
-      if (!_textDown.loadFromFile("../../sprites/char/skel_front.png"))
+      if (!_textDown.loadFromFile("../../sprites/char/panda_front_red.png"))
 	std::cout << "can't load the player " << _nb << std::endl;
-      else if (!_textUp.loadFromFile("../../sprites/char/skel_back.png"))
+      else if (!_textUp.loadFromFile("../../sprites/char/panda_back_red.png"))
 	std::cout << "can't load the player " << _nb << std::endl;
-      else if (!_textLeft.loadFromFile("../../sprites/char/skel_left.png"))
+      else if (!_textLeft.loadFromFile("../../sprites/char/panda_left_red.png"))
 	std::cout << "can't load the player " << _nb << std::endl;
-      else if (!_textRight.loadFromFile("../../sprites/char/skel_right.png"))
+      else if (!_textRight.loadFromFile("../../sprites/char/panda_right_red.png"))
 	std::cout << "can't load the player " << _nb << std::endl;
       else
 	{
