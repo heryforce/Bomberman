@@ -5,22 +5,28 @@
 
 sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
 {
-  if (event.key.code == sf::Keyboard::Space)
+  if (p->getNb() == 1)
     {
-      if (p->getAmmo() == true)
+      if (event.key.code == sf::Keyboard::Space)
 	{
-	  p->setAmmo(false);
-	  clock->restart();
-	  return p->putBomb();
+	  if (p->getAmmo() == true)
+	    {
+	      p->setAmmo(false);
+	      clock->restart();
+	      return p->putBomb();
+	    }
 	}
     }
-  else if (event.key.code == sf::Keyboard::Return)
+  else if (p->getNb() == 2)
     {
-      if (p->getAmmo() == true)
+      if (event.key.code == sf::Keyboard::Return)
 	{
-	  p->setAmmo(false);
-	  clock->restart();
-	  return p->putBomb();
+	  if (p->getAmmo() == true)
+	    {
+	      p->setAmmo(false);
+	      clock->restart();
+	      return p->putBomb();
+	    }
 	}
     }
 }
@@ -35,11 +41,7 @@ void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Rende
       if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
 	window->draw(spriteBomb);
       else if (p->getAmmo() == false && x <= 9)
-	{
-	  std::cout << "x = " << x << " before explosion" << std::endl;
-	  p->explosion(window, spriteBomb.getPosition(), x++);
-	  std::cout << "x = " << x << " after explosion" << std::endl;
-	}
+	p->explosion(window, spriteBomb.getPosition(), x++);
       else
 	{
 	  p->setAmmo(true);
@@ -51,11 +53,7 @@ void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Rende
       if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
 	window->draw(spriteBomb);
       else if (p->getAmmo() == false && y <= 9)
-	{
-	  std::cout << "y = " << y << " before explosion" << std::endl;
-	  p->explosion(window, spriteBomb.getPosition(), y++);
-	  std::cout << "y = " << y << " after explosion" << std::endl;
-	}
+	p->explosion(window, spriteBomb.getPosition(), y++);
       else
 	{
 	  p->setAmmo(true);
@@ -77,6 +75,7 @@ int			main()
   sf::Sprite		spriteBomb1;
   sf::Sprite		spriteBomb2;
 
+  window.setFramerateLimit(60);
   while (window.isOpen())
     {
       while (window.pollEvent(event))
@@ -90,6 +89,10 @@ int			main()
 	    }
 	  pos1 = p1.move(event);
 	  pos2 = p2.move(event);
+	  p1.setBound();
+	  p2.setBound();
+	  if (p1.getBound().intersects(p2.getBound()))
+	    std::cout << "T'AS TOUCHÉ !" << std::endl;
 	  std::cout << "PLAYER 1 : x = " << pos1.x << ", y = " << pos1.y << std::endl;
 	  std::cout << "PLAYER 2 : x = " << pos2.x << ", y = " << pos2.y << std::endl;
 	}

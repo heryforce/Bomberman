@@ -39,30 +39,25 @@ void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
     default:
       break;
     }
-  _exp.setPosition(bombPos.x + 9, bombPos.y);
+  int	i = 0;
+  int	z = 0;
+
+  _exp.setPosition(bombPos.x, bombPos.y);
+  std::cout << "exp.x = " << _exp.getPosition().x << ", exp.y = " << _exp.getPosition().y << std::endl;
   window->draw(_exp);
-  _exp.setPosition(bombPos.x + 18, bombPos.y);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x + 27, bombPos.y);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x - 9, bombPos.y);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x - 18, bombPos.y);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x - 27, bombPos.y);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y + 9);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y + 18);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y + 27);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y - 9);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y - 18);
-  window->draw(_exp);
-  _exp.setPosition(bombPos.x, bombPos.y - 27);
-  window->draw(_exp);
+  while (i < 10)
+    {
+      z += 9;
+      _exp.setPosition(bombPos.x + z, bombPos.y);
+      window->draw(_exp);
+      _exp.setPosition(bombPos.x - z, bombPos.y);
+      window->draw(_exp);
+      _exp.setPosition(bombPos.x, bombPos.y + z);
+      window->draw(_exp);
+      _exp.setPosition(bombPos.x, bombPos.y - z);
+      window->draw(_exp);
+      ++i;
+    }
 }
 
 void	Bomb::setPos(sf::Vector2f pos)
