@@ -5,47 +5,63 @@
 
 sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
 {
-  if (p->getNb() == 1)
+  if (event.key.code == sf::Keyboard::Space)
     {
-      if (event.key.code == sf::Keyboard::Space)
+      if (p->getAmmo() == true)
 	{
-	  if (p->getAmmo() == true)
-	    {
-	      p->setAmmo(false);
-	      clock->restart();
-	      return p->putBomb();
-	    }
+	  p->setAmmo(false);
+	  clock->restart();
+	  return p->putBomb();
 	}
     }
-  else if (p->getNb() == 2)
+  else if (event.key.code == sf::Keyboard::Return)
     {
-      if (event.key.code == sf::Keyboard::Return)
+      if (p->getAmmo() == true)
 	{
-	  if (p->getAmmo() == true)
-	    {
-	      p->setAmmo(false);
-	      clock->restart();
-	      return p->putBomb();
-	    }
+	  p->setAmmo(false);
+	  clock->restart();
+	  return p->putBomb();
 	}
     }
 }
 
-void	bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
+void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
 {
   static int	x = 1;
-  
-  if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
-    window->draw(spriteBomb);
-  else if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() >= 1 && x <= 9)
-    p->explosion(window, spriteBomb.getPosition(), x++);
-  else if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() >= 1 && x > 9)
+  static int	y = 1;
+
+  if (p->getNb() == 1)
     {
-      p->setAmmo(true);
-      x = 1;
+      if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
+	window->draw(spriteBomb);
+      else if (p->getAmmo() == false && x <= 9)
+	{
+	  std::cout << "x = " << x << " before explosion" << std::endl;
+	  p->explosion(window, spriteBomb.getPosition(), x++);
+	  std::cout << "x = " << x << " after explosion" << std::endl;
+	}
+      else
+	{
+	  p->setAmmo(true);
+	  x = 1;
+	}
     }
-  else
-    x = 1;
+  else if (p->getNb() == 2)
+    {
+      if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
+	window->draw(spriteBomb);
+      else if (p->getAmmo() == false && y <= 9)
+	{
+	  std::cout << "y = " << y << " before explosion" << std::endl;
+	  p->explosion(window, spriteBomb.getPosition(), y++);
+	  std::cout << "y = " << y << " after explosion" << std::endl;
+	}
+      else
+	{
+	  p->setAmmo(true);
+	  y = 1;
+	}
+    }
 }
 
 int			main()
