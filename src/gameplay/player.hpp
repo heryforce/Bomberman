@@ -15,8 +15,11 @@ class Player
   sf::Sprite	_spriteP;
   Bomb		_bomb;
   bool		_ammo;
+  sf::FloatRect	_bound;
 
 public:
+  void		setBound();
+  sf::FloatRect	getBound() const;
   void		explosion(sf::RenderWindow *, sf::Vector2f, int);
   int		getNb() const;
   sf::Sprite	putBomb();
