@@ -2,6 +2,16 @@
 #include <iostream>
 #include "bomb.hpp"
 
+void	Player::setBound()
+{
+  _bound = _spriteP.getGlobalBounds();
+}
+
+sf::FloatRect	Player::getBound() const
+{
+  return _bound;
+}
+
 void	Player::explosion(sf::RenderWindow *window, sf::Vector2f bombPos, int x)
 {
   _bomb.explosion(bombPos, window, x);
@@ -24,7 +34,6 @@ bool	Player::getAmmo() const
 
 sf::Sprite	Player::putBomb()
 {
-  std::cout << "dans player->putbomb()" << std::endl;
   _bomb.setPos(_spriteP.getPosition());
   _ammo = false;
   return (_bomb.getBomb());
@@ -143,6 +152,7 @@ Player::Player(int nb) : _nb(nb), _pv(2), _ammo(true)
 	  _spriteP.setPosition(450, 450);
 	}
     }
+  _bound = _spriteP.getGlobalBounds();
   _ammo = true;
 }
 

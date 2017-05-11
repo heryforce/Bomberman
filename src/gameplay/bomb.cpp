@@ -43,18 +43,17 @@ void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
   int	z = 0;
 
   _exp.setPosition(bombPos.x, bombPos.y);
-  std::cout << "exp.x = " << _exp.getPosition().x << ", exp.y = " << _exp.getPosition().y << std::endl;
   window->draw(_exp);
   while (i < 10)
     {
       z += 9;
-      _exp.setPosition(bombPos.x + z, bombPos.y);
+      _exp.setPosition(bombPos.x + z , bombPos.y);
       window->draw(_exp);
-      _exp.setPosition(bombPos.x - z, bombPos.y);
+      _exp.setPosition(bombPos.x - z , bombPos.y);
       window->draw(_exp);
-      _exp.setPosition(bombPos.x, bombPos.y + z);
+      _exp.setPosition(bombPos.x , bombPos.y + z);
       window->draw(_exp);
-      _exp.setPosition(bombPos.x, bombPos.y - z);
+      _exp.setPosition(bombPos.x , bombPos.y - z);
       window->draw(_exp);
       ++i;
     }
