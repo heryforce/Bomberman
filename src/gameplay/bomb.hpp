@@ -17,8 +17,13 @@ class	Bomb
   sf::Texture	_textBomb;
   sf::Sprite	_exp;
   sf::Sprite	_spriteBomb;
-  
+  sf::FloatRect	_vBound;
+  sf::FloatRect	_hBound;
+
 public:
+  sf::FloatRect	getVBound() const;
+  sf::FloatRect	getHBound() const;
+  void		unsetBound();
   sf::Sprite	getBomb() const;
   void		setPos(sf::Vector2f);
   void		explosion(sf::Vector2f, sf::RenderWindow *, int);

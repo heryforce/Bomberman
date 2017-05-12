@@ -46,6 +46,7 @@ void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Rende
 	{
 	  p->setAmmo(true);
 	  x = 1;
+	  p->unsetEBound();
 	}
     }
   else if (p->getNb() == 2)
@@ -58,6 +59,7 @@ void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Rende
 	{
 	  p->setAmmo(true);
 	  y = 1;
+	  p->unsetEBound();
 	}
     }
 }
@@ -102,6 +104,14 @@ int			main()
       window.draw(p1.getP());
       window.draw(p2.getP());
       window.display();
+      if (p1.getHBound().intersects(p2.getBound()) || p1.getVBound().intersects(p2.getBound()))
+	{
+	  std::cout << "p2 t mort" << std::endl;
+	}
+      else if (p2.getHBound().intersects(p1.getBound()) || p2.getVBound().intersects(p1.getBound()))
+	{
+	  std::cout << "p1 t mort" << std::endl;
+	}
     }
   return 0;
 }

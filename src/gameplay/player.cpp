@@ -2,6 +2,21 @@
 #include <iostream>
 #include "bomb.hpp"
 
+sf::FloatRect	Player::getVBound() const
+{
+  return _bomb.getVBound();
+}
+
+sf::FloatRect	Player::getHBound() const
+{
+  return _bomb.getHBound();
+}
+
+void	Player::unsetEBound()
+{
+  _bomb.unsetBound();
+}
+
 void	Player::setBound()
 {
   _bound = _spriteP.getGlobalBounds();

@@ -18,6 +18,9 @@ class Player
   sf::FloatRect	_bound;
 
 public:
+  sf::FloatRect	getVBound() const;
+  sf::FloatRect	getHBound() const;
+  void		unsetEBound();
   void		setBound();
   sf::FloatRect	getBound() const;
   void		explosion(sf::RenderWindow *, sf::Vector2f, int);

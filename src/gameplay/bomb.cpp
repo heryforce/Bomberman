@@ -5,6 +5,28 @@
 #include <iostream>
 #include <string>
 
+sf::FloatRect	Bomb::getVBound() const
+{
+  return _vBound;
+}
+
+sf::FloatRect	Bomb::getHBound() const
+{
+  return _hBound;
+}
+
+void	Bomb::unsetBound()
+{
+  _hBound.left = 0;
+  _hBound.top = 0;
+  _hBound.width = 0;
+  _hBound.height = 0;
+  _vBound.left = 0;
+  _vBound.top = 0;
+  _vBound.width = 0;
+  _vBound.height = 0;
+}
+
 void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
 {
   switch(x)
@@ -57,6 +79,28 @@ void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
       window->draw(_exp);
       ++i;
     }
+  sf::RectangleShape	shape;
+  shape.setFillColor(sf::Color(100, 250, 50));
+  shape.setPosition(bombPos.x - 90, bombPos.y);
+  shape.setSize(sf::Vector2f(210, 28));
+  
+  sf::RectangleShape	shape2;
+  shape2.setFillColor(sf::Color(100, 250, 50));
+  shape2.setPosition(bombPos.x, bombPos.y - 90);
+  shape2.setSize(sf::Vector2f(28, 210));
+  if (x == 4)
+    {
+      _hBound.left = bombPos.x - 90;
+      _hBound.top = bombPos.y;
+      _hBound.width = 210;
+      _hBound.height = 28;
+      _vBound.left = bombPos.x;
+      _vBound.top = bombPos.y - 90;
+      _vBound.width = 28;
+      _vBound.height = 210;
+    }
+  window->draw(shape);
+  window->draw(shape2);
 }
 
 void	Bomb::setPos(sf::Vector2f pos)
