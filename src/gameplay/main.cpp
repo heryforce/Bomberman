@@ -17,7 +17,7 @@ sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
 	    }
 	}
     }
-  else if (p->getNb() == 2)
+  else
     {
       if (event.key.code == sf::Keyboard::Return)
 	{
@@ -56,7 +56,7 @@ int		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Render
 	  return 1;
 	}
     }
-  else if (p->getNb() == 2)
+  else
     {
       if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
 	{
