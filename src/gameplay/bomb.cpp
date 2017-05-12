@@ -79,15 +79,6 @@ void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
       window->draw(_exp);
       ++i;
     }
-  sf::RectangleShape	shape;
-  shape.setFillColor(sf::Color(100, 250, 50));
-  shape.setPosition(bombPos.x - 90, bombPos.y);
-  shape.setSize(sf::Vector2f(210, 28));
-  
-  sf::RectangleShape	shape2;
-  shape2.setFillColor(sf::Color(100, 250, 50));
-  shape2.setPosition(bombPos.x, bombPos.y - 90);
-  shape2.setSize(sf::Vector2f(28, 210));
   if (x == 4)
     {
       _hBound.left = bombPos.x - 90;
@@ -99,8 +90,6 @@ void	Bomb::explosion(sf::Vector2f bombPos, sf::RenderWindow *window, int x)
       _vBound.width = 28;
       _vBound.height = 210;
     }
-  window->draw(shape);
-  window->draw(shape2);
 }
 
 void	Bomb::setPos(sf::Vector2f pos)

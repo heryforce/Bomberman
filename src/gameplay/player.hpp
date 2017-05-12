@@ -15,9 +15,12 @@ class Player
   sf::Sprite	_spriteP;
   Bomb		_bomb;
   bool		_ammo;
+  bool		_touched;
   sf::FloatRect	_bound;
 
 public:
+  void		setTouched(bool);
+  bool		getTouched() const;
   sf::FloatRect	getVBound() const;
   sf::FloatRect	getHBound() const;
   void		unsetEBound();
@@ -29,6 +32,7 @@ public:
   void		setAmmo(bool);
   bool		getAmmo() const;
   sf::Sprite	getP() const;
+  void		setPv();
   int		getPv() const;
   sf::Vector2f	move(sf::Event);
   

@@ -31,7 +31,7 @@ sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
     }
 }
 
-void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
+int		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
 {
   static int	x = 1;
   static int	y = 1;
@@ -39,27 +39,41 @@ void		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::Rende
   if (p->getNb() == 1)
     {
       if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
-	window->draw(spriteBomb);
+	{
+	  window->draw(spriteBomb);
+	  return 0;
+	}
       else if (p->getAmmo() == false && x <= 9)
-	p->explosion(window, spriteBomb.getPosition(), x++);
+	{
+	  p->explosion(window, spriteBomb.getPosition(), x++);
+	  return 0;
+	}
       else
 	{
 	  p->setAmmo(true);
 	  x = 1;
 	  p->unsetEBound();
+	  return 1;
 	}
     }
   else if (p->getNb() == 2)
     {
       if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
-	window->draw(spriteBomb);
+	{
+	  window->draw(spriteBomb);
+	  return 0;
+	}
       else if (p->getAmmo() == false && y <= 9)
-	p->explosion(window, spriteBomb.getPosition(), y++);
+	{
+	  p->explosion(window, spriteBomb.getPosition(), y++);
+	  return 0;
+	}
       else
 	{
 	  p->setAmmo(true);
 	  y = 1;
 	  p->unsetEBound();
+	  return 1;
 	}
     }
 }
@@ -93,24 +107,36 @@ int			main()
 	  pos2 = p2.move(event);
 	  p1.setBound();
 	  p2.setBound();
-	  if (p1.getBound().intersects(p2.getBound()))
-	    std::cout << "T'AS TOUCHÉ !" << std::endl;
 	  std::cout << "PLAYER 1 : x = " << pos1.x << ", y = " << pos1.y << std::endl;
 	  std::cout << "PLAYER 2 : x = " << pos2.x << ", y = " << pos2.y << std::endl;
 	}
       window.clear();
-      bomb_drawing(&p1, &clock1, spriteBomb1, &window);
-      bomb_drawing(&p2, &clock2, spriteBomb2, &window);
+      if (bomb_drawing(&p1, &clock1, spriteBomb1, &window) == 1)
+	p2.setTouched(false);
+      if (bomb_drawing(&p2, &clock2, spriteBomb2, &window) == 1)
+	p1.setTouched(false);
       window.draw(p1.getP());
       window.draw(p2.getP());
       window.display();
-      if (p1.getHBound().intersects(p2.getBound()) || p1.getVBound().intersects(p2.getBound()))
+      if (p2.getTouched() == false && (p1.getHBound().intersects(p2.getBound()) || p1.getVBound().intersects(p2.getBound())))
 	{
-	  std::cout << "p2 t mort" << std::endl;
+	  p2.setTouched(true);
+	  p2.setPv();
+	  if (p2.getPv() == 0)
+	    {
+	      std::cout << "Le joueur 1 a gagné !" << std::endl;
+	      return 0;
+	    }
 	}
-      else if (p2.getHBound().intersects(p1.getBound()) || p2.getVBound().intersects(p1.getBound()))
+      else if (p1.getTouched() == false && (p2.getHBound().intersects(p1.getBound()) || p2.getVBound().intersects(p1.getBound())))
 	{
-	  std::cout << "p1 t mort" << std::endl;
+	  p1.setTouched(true);
+	  p1.setPv();
+	  if (p1.getPv() == 0)
+	    {
+	      std::cout << "Le joueur 2 a gagné !" << std::endl;
+	      return 0;
+	    }
 	}
     }
   return 0;

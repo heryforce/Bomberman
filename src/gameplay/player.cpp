@@ -2,6 +2,16 @@
 #include <iostream>
 #include "bomb.hpp"
 
+bool	Player::getTouched() const
+{
+  return _touched;
+}
+
+void	Player::setTouched(bool b)
+{
+  _touched = b;
+}
+
 sf::FloatRect	Player::getVBound() const
 {
   return _bomb.getVBound();
@@ -57,6 +67,11 @@ sf::Sprite	Player::putBomb()
 sf::Sprite	Player::getP() const
 {
   return _spriteP;
+}
+
+void	Player::setPv()
+{
+  _pv += -1;
 }
 
 int	Player::getPv() const
@@ -133,7 +148,7 @@ sf::Vector2f	Player::move(sf::Event event)
   return _spriteP.getPosition();
 }
 
-Player::Player(int nb) : _nb(nb), _pv(2), _ammo(true)
+Player::Player(int nb) : _nb(nb), _pv(1), _ammo(true)
 {
   if (nb == 1)
     {
@@ -169,9 +184,7 @@ Player::Player(int nb) : _nb(nb), _pv(2), _ammo(true)
     }
   _bound = _spriteP.getGlobalBounds();
   _ammo = true;
+  _touched = false;
 }
 
-Player::~Player()
-{
-  std::cout << "The player " << _nb << " is dead !" << std::endl;
-}
+Player::~Player(){}
