@@ -1,8 +1,10 @@
 CC		= g++
 
 SRCS		= main.cpp \
+		bDrawing.cpp \
 		bomb.cpp \
-		player.cpp
+		player.cpp \
+		endGame.cpp
 
 RM		= rm -rf
 

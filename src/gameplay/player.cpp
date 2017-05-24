@@ -153,13 +153,13 @@ Player::Player(int nb) : _nb(nb), _pv(1), _ammo(true)
   if (nb == 1)
     {
       if (!_textDown.loadFromFile("../../sprites/char/panda_front.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textUp.loadFromFile("../../sprites/char/panda_back.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textLeft.loadFromFile("../../sprites/char/panda_left.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textRight.loadFromFile("../../sprites/char/panda_right.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else
 	{
 	  _spriteP.setTexture(_textDown);
@@ -169,13 +169,13 @@ Player::Player(int nb) : _nb(nb), _pv(1), _ammo(true)
   else
     {
       if (!_textDown.loadFromFile("../../sprites/char/panda_front_red.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textUp.loadFromFile("../../sprites/char/panda_back_red.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textLeft.loadFromFile("../../sprites/char/panda_left_red.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textRight.loadFromFile("../../sprites/char/panda_right_red.png"))
-	std::cout << "can't load the player " << _nb << std::endl;
+	std::cerr << "can't load the player " << _nb << std::endl;
       else
 	{
 	  _spriteP.setTexture(_textUp);

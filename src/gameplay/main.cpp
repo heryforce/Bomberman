@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "player.hpp"
+#include "proto.hpp"
 
 sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
 {
@@ -31,66 +32,25 @@ sf::Sprite	player_putBomb(sf::Event event, Player *p, sf::Clock *clock)
     }
 }
 
-int		bomb_drawing(Player *p, sf::Clock *clock, sf::Sprite spriteBomb, sf::RenderWindow *window)
-{
-  static int	x = 1;
-  static int	y = 1;
-
-  if (p->getNb() == 1)
-    {
-      if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
-	{
-	  window->draw(spriteBomb);
-	  return 0;
-	}
-      else if (p->getAmmo() == false && x <= 9)
-	{
-	  p->explosion(window, spriteBomb.getPosition(), x++);
-	  return 0;
-	}
-      else
-	{
-	  p->setAmmo(true);
-	  x = 1;
-	  p->unsetEBound();
-	  return 1;
-	}
-    }
-  else
-    {
-      if (p->getAmmo() == false && clock->getElapsedTime().asSeconds() < 1)
-	{
-	  window->draw(spriteBomb);
-	  return 0;
-	}
-      else if (p->getAmmo() == false && y <= 9)
-	{
-	  p->explosion(window, spriteBomb.getPosition(), y++);
-	  return 0;
-	}
-      else
-	{
-	  p->setAmmo(true);
-	  y = 1;
-	  p->unsetEBound();
-	  return 1;
-	}
-    }
-}
-
 int			main()
 {
   sf::RenderWindow	window(sf::VideoMode(500, 500), "BomberSwann");
   Player		p1(1);
   Player		p2(2);
-  sf::Vector2f		pos1;
-  sf::Vector2f		pos2;
   sf::Event		event;
   sf::Clock		clock1;
   sf::Clock		clock2;
   sf::Sprite		spriteBomb1;
   sf::Sprite		spriteBomb2;
+  sf::Texture		tbg;
+  sf::Sprite		bg;
 
+  if (!tbg.loadFromFile("../../sprites/map/background.png"))
+    {
+      std::cerr << "couldn't load background" << std::endl;
+      exit(1);
+    }
+  bg.setTexture(tbg);
   window.setFramerateLimit(60);
   while (window.isOpen())
     {
@@ -103,41 +63,22 @@ int			main()
 	      spriteBomb1 = player_putBomb(event, &p1, &clock1);
 	      spriteBomb2 = player_putBomb(event, &p2, &clock2);
 	    }
-	  pos1 = p1.move(event);
-	  pos2 = p2.move(event);
+	  p1.move(event);
+	  p2.move(event);
 	  p1.setBound();
 	  p2.setBound();
-	  std::cout << "PLAYER 1 : x = " << pos1.x << ", y = " << pos1.y << std::endl;
-	  std::cout << "PLAYER 2 : x = " << pos2.x << ", y = " << pos2.y << std::endl;
 	}
       window.clear();
+      window.draw(bg);
       if (bomb_drawing(&p1, &clock1, spriteBomb1, &window) == 1)
 	p2.setTouched(false);
-      if (bomb_drawing(&p2, &clock2, spriteBomb2, &window) == 1)
+      if (bomb_drawing2(&p2, &clock2, spriteBomb2, &window) == 1)
 	p1.setTouched(false);
       window.draw(p1.getP());
       window.draw(p2.getP());
       window.display();
-      if (p2.getTouched() == false && (p1.getHBound().intersects(p2.getBound()) || p1.getVBound().intersects(p2.getBound())))
-	{
-	  p2.setTouched(true);
-	  p2.setPv();
-	  if (p2.getPv() == 0)
-	    {
-	      std::cout << "Le joueur 1 a gagné !" << std::endl;
-	      return 0;
-	    }
-	}
-      else if (p1.getTouched() == false && (p2.getHBound().intersects(p1.getBound()) || p2.getVBound().intersects(p1.getBound())))
-	{
-	  p1.setTouched(true);
-	  p1.setPv();
-	  if (p1.getPv() == 0)
-	    {
-	      std::cout << "Le joueur 2 a gagné !" << std::endl;
-	      return 0;
-	    }
-	}
+      if (endGame(&p1, &p2) == 0 || endGame(&p2, &p1) == 0)
+	return 0;
     }
   return 0;
 }

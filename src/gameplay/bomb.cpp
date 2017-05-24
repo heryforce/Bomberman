@@ -105,25 +105,25 @@ sf::Sprite	Bomb::getBomb() const
 Bomb::Bomb()
 {
   if (!_textBomb.loadFromFile("../../sprites/weapons/bomb32.png"))
-    std::cout << "can't load the bomb" << std::endl;
+    std::cerr << "can't load the bomb" << std::endl;
   else if (!_exp1.loadFromFile("../../sprites/fx/exp1.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp2.loadFromFile("../../sprites/fx/exp2.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp3.loadFromFile("../../sprites/fx/exp3.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp4.loadFromFile("../../sprites/fx/exp4.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp5.loadFromFile("../../sprites/fx/exp5.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp6.loadFromFile("../../sprites/fx/exp6.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp7.loadFromFile("../../sprites/fx/exp7.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp8.loadFromFile("../../sprites/fx/exp8.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else if (!_exp9.loadFromFile("../../sprites/fx/exp9.png"))
-    std::cout << "can't load the bomb fx" << std::endl;
+    std::cerr << "can't load the bomb fx" << std::endl;
   else
     _spriteBomb.setTexture(_textBomb);
 }
