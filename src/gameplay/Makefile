@@ -4,7 +4,8 @@ SRCS		= main.cpp \
 		bDrawing.cpp \
 		bomb.cpp \
 		player.cpp \
-		endGame.cpp
+		endGame.cpp \
+		wallDrawing.cpp
 
 RM		= rm -rf
 

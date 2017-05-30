@@ -88,25 +88,25 @@ sf::Vector2f	Player::move(sf::Event event)
 	case sf::Keyboard::Z:
 	  if (_spriteP.getTexture() != &_textUp)
 	    _spriteP.setTexture(_textUp);
-	  if (_spriteP.getPosition().y > 8)
+	  if (_spriteP.getPosition().y > 18)
 	    _spriteP.move(0, -9);
 	  break;
 	case sf::Keyboard::S:
 	  if (_spriteP.getTexture() != &_textDown)
 	    _spriteP.setTexture(_textDown);
-	  if (_spriteP.getPosition().y < 468)
+	  if (_spriteP.getPosition().y < 459)
 	    _spriteP.move(0, 9);
 	  break;
 	case sf::Keyboard::Q:
 	  if (_spriteP.getTexture() != &_textLeft)
 	    _spriteP.setTexture(_textLeft);
-	  if (_spriteP.getPosition().x > 8)
+	  if (_spriteP.getPosition().x > 18)
 	_spriteP.move(-9, 0);
 	  break;
 	case sf::Keyboard::D:
 	  if (_spriteP.getTexture() != &_textRight)
 	    _spriteP.setTexture(_textRight);
-	  if (_spriteP.getPosition().x < 468)
+	  if (_spriteP.getPosition().x < 459)
 	    _spriteP.move(9, 0);
 	  break;
 	default:
@@ -120,25 +120,25 @@ sf::Vector2f	Player::move(sf::Event event)
 	case sf::Keyboard::Up:
 	  if (_spriteP.getTexture() != &_textUp)
 	    _spriteP.setTexture(_textUp);
-	  if (_spriteP.getPosition().y > 8)
+	  if (_spriteP.getPosition().y > 18)
 	    _spriteP.move(0, -9);
 	  break;
 	case sf::Keyboard::Down:
 	  if (_spriteP.getTexture() != &_textDown)
 	    _spriteP.setTexture(_textDown);
-	  if (_spriteP.getPosition().y < 468)
+	  if (_spriteP.getPosition().y < 459)
 	    _spriteP.move(0, 9);
 	  break;
 	case sf::Keyboard::Left:
 	  if (_spriteP.getTexture() != &_textLeft)
 	    _spriteP.setTexture(_textLeft);
-	  if (_spriteP.getPosition().x > 8)
+	  if (_spriteP.getPosition().x > 18)
 	_spriteP.move(-9, 0);
 	  break;
 	case sf::Keyboard::Right:
 	  if (_spriteP.getTexture() != &_textRight)
 	    _spriteP.setTexture(_textRight);
-	  if (_spriteP.getPosition().x < 468)
+	  if (_spriteP.getPosition().x < 459)
 	    _spriteP.move(9, 0);
 	  break;
 	default:
@@ -163,24 +163,24 @@ Player::Player(int nb) : _nb(nb), _pv(1), _ammo(true)
       else
 	{
 	  _spriteP.setTexture(_textDown);
-	  _spriteP.setPosition(0, 0);
+	  _spriteP.setPosition(9, 9);
 	}
     }
   else
     {
       if (!_textDown.loadFromFile("../../sprites/char/panda_front_red.png"))
-	std::cerr << "can't load the player " << _nb << std::endl;
+    	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textUp.loadFromFile("../../sprites/char/panda_back_red.png"))
-	std::cerr << "can't load the player " << _nb << std::endl;
+    	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textLeft.loadFromFile("../../sprites/char/panda_left_red.png"))
-	std::cerr << "can't load the player " << _nb << std::endl;
+    	std::cerr << "can't load the player " << _nb << std::endl;
       else if (!_textRight.loadFromFile("../../sprites/char/panda_right_red.png"))
-	std::cerr << "can't load the player " << _nb << std::endl;
+    	std::cerr << "can't load the player " << _nb << std::endl;
       else
-	{
-	  _spriteP.setTexture(_textUp);
-	  _spriteP.setPosition(450, 450);
-	}
+    	{
+    	  _spriteP.setTexture(_textUp);
+    	  _spriteP.setPosition(450, 450);
+    	}
     }
   _bound = _spriteP.getGlobalBounds();
   _ammo = true;

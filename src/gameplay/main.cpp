@@ -44,12 +44,7 @@ int			main()
   sf::Sprite		spriteBomb2;
   sf::Texture		tbg;
   sf::Sprite		bg;
-  // sf::Texture		tAst;
-  // sf::Sprite		sAst;
 
-  // tAst.loadFromFile("../../sprites/map/ast.png");
-  // sAst.setTexture(tAst);
-  // sAst.setPosition(300, 300);
   if (!tbg.loadFromFile("../../sprites/map/background.png"))
     {
       std::cerr << "couldn't load background" << std::endl;
@@ -75,11 +70,11 @@ int			main()
 	}
       window.clear();
       window.draw(bg);
+      wallDrawing(&window);
       if (bomb_drawing(&p1, &clock1, spriteBomb1, &window) == 1)
 	p2.setTouched(false);
       if (bomb_drawing2(&p2, &clock2, spriteBomb2, &window) == 1)
 	p1.setTouched(false);
-      // window.draw(sAst);
       window.draw(p1.getP());
       window.draw(p2.getP());
       window.display();

@@ -8,5 +8,6 @@ sf::Sprite	player_putBomb(sf::Event, Player *, sf::Clock *);
 int		bomb_drawing(Player *, sf::Clock *, sf::Sprite, sf::RenderWindow *);
 int		bomb_drawing2(Player *, sf::Clock *, sf::Sprite, sf::RenderWindow *);
 int		endGame(Player *, Player*);
+void		wallDrawing(sf::RenderWindow *);
 
 #endif
