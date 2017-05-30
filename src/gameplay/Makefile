@@ -5,7 +5,8 @@ SRCS		= main.cpp \
 		bomb.cpp \
 		player.cpp \
 		endGame.cpp \
-		wallDrawing.cpp
+		wallDrawing.cpp \
+		getMenu.cpp
 
 RM		= rm -rf
 

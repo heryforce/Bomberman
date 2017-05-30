@@ -9,5 +9,6 @@ int		bomb_drawing(Player *, sf::Clock *, sf::Sprite, sf::RenderWindow *);
 int		bomb_drawing2(Player *, sf::Clock *, sf::Sprite, sf::RenderWindow *);
 int		endGame(Player *, Player*);
 void		wallDrawing(sf::RenderWindow *);
+void		getMenu(sf::RenderWindow *);
 
 #endif

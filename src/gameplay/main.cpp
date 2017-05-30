@@ -44,6 +44,7 @@ int			main()
   sf::Sprite		spriteBomb2;
   sf::Texture		tbg;
   sf::Sprite		bg;
+  int			menu = 0;
 
   if (!tbg.loadFromFile("../../sprites/map/background.png"))
     {
@@ -54,6 +55,11 @@ int			main()
   window.setFramerateLimit(60);
   while (window.isOpen())
     {
+      if (menu == 0)
+	{
+	  getMenu(&window);
+	  ++menu;
+	}
       while (window.pollEvent(event))
 	{
 	  if (event.type == sf::Event::Closed)
