@@ -8,12 +8,12 @@ void		getMenu(sf::RenderWindow *win)
   sf::Texture	m1;
   sf::Texture	m2;
 
-  if (!m1.loadFromFile("../../sprites/menu/menu1.png"))
+  if (!m1.loadFromFile("../sprites/menu/menu1.png"))
     {
       std::cerr << "no menu" << std::endl;
       exit(1);
     }
-  if (!m2.loadFromFile("../../sprites/menu/menu2.png"))
+  if (!m2.loadFromFile("../sprites/menu/menu2.png"))
     {
       std::cerr << "no menu" << std::endl;
       exit(1);

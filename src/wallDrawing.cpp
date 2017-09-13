@@ -7,7 +7,7 @@ void		wallDrawing(sf::RenderWindow *window)
   sf::Sprite	sWall;
   int		i = 0;
 
-  if (!tWall.loadFromFile("../../sprites/map/ast.png"))
+  if (!tWall.loadFromFile("../sprites/map/ast.png"))
     {
       std::cerr << "Couldn't load the wall" << std::endl;
       exit(1);
